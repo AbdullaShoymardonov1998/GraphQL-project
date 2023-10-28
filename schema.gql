@@ -1,0 +1,105 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  alternativeName: String
+  email: String!
+  phoneNumber: String!
+}
+
+type AuthReturnType {
+  message: String!
+  jwtToken: String!
+}
+
+type EventType {
+  id: Int!
+  startDate: DateTime!
+  endDate: DateTime!
+  name: String!
+  description: String
+  locationId: Int
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type LocationType {
+  id: Int!
+  name: String!
+}
+
+type Query {
+  getUser(id: String!): User!
+  getAllUsers: User!
+  findAllEvents(events: FindEventsInput!): [EventType!]!
+  findAllLocations: [LocationType!]!
+}
+
+input FindEventsInput {
+  startDate: DateTime
+  endDate: DateTime
+  locationId: Int
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): User!
+  updateUser(id: String!, input: UpdateUserInput!): User!
+  deleteUser(id: String!): User!
+  login(data: LoginInput!): AuthReturnType!
+  createEvent(data: CreateEventInput!): EventType!
+  updateEvent(id: Int!, data: UpdateEventInput!): EventType!
+  deleteEvent(id: Int!): EventType!
+  createLocation(data: CreateLocationInput!): LocationType!
+  updateLocation(id: Int!, data: CreateLocationInput!): LocationType!
+  deleteLocation(id: Int!): LocationType!
+}
+
+input CreateUserInput {
+  firstName: String!
+  lastName: String!
+  alternativeName: String
+  email: String!
+  phoneNumber: String!
+  password: String!
+}
+
+input UpdateUserInput {
+  firstName: String
+  lastName: String
+  alternativeName: String
+  email: String
+  phoneNumber: String
+  password: String
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input CreateEventInput {
+  startDate: String!
+  endDate: String!
+  name: String!
+  description: String
+  locationId: Int
+}
+
+input UpdateEventInput {
+  startDate: String!
+  endDate: String!
+  name: String!
+  description: String
+  locationId: Int
+}
+
+input CreateLocationInput {
+  name: String!
+}

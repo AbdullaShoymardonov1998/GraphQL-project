@@ -1,6 +1,7 @@
-import { UserRole } from '@prisma/client'
+import { ObjectType, Field } from '@nestjs/graphql'
 
-export interface JwtPayload {
+@ObjectType()
+export class JwtPayloadType {
+  @Field()
   id: string
-  role: UserRole
 }

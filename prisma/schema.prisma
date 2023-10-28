@@ -16,12 +16,21 @@ model User {
   phoneNumber     String @map("phone_number") @db.VarChar(30)
   password        String @db.VarChar(100)
 
-  role UserRole @default(MANAGER)
-
   @@map("users")
 }
 
-enum UserRole {
-  ADMIN
-  MANAGER
+model Event {
+  id          Int       @id @default(autoincrement())
+  startDate   DateTime
+  endDate     DateTime
+  name        String
+  description String?
+  locationId  Int?
+  location    Location? @relation(fields: [locationId], references: [id])
+}
+
+model Location {
+  id     Int     @id @default(autoincrement())
+  name   String
+  events Event[]
 }
